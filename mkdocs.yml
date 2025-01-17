@@ -1,1 +1,43 @@
-site_name: My Docs
+# Project information
+site_name: DS & MLE Notes 
+site_url: https://yeriel.github.io/
+site_author: Yeriel Paz Ureta
+site_description: 
+  Soy Yeriel, ML engineer and Data scientist, 
+  y estas son mis notas
+
+# Repository
+repo_name: yeriel/yeriel.github.io
+repo_url: https://github.com/yeriel/yeriel.github.io
+
+# Configuration
+theme:
+  name: material
+  language: es
+  features:
+    - content.code.copy
+
+
+nav:
+  - Inicio: index.md
+
+# Additional configuration
+extra:
+  analytics:
+    provider: google
+    property: G-LS5X4V2NKZ
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - footnotes
+  - codehilite:
+      guess_lang: false
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
