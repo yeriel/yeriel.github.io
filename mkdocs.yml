@@ -17,9 +17,10 @@ theme:
   features:
     - content.code.copy
 
-
 nav:
   - Inicio: index.md
+  - Matematicas:
+    - Algebra Lineal: math/lineal_algebra.md
 
 # Additional configuration
 extra:
