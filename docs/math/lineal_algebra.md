@@ -4,8 +4,7 @@ El álgebra lineal es una rama de las matemáticas que se utiliza ampliamente en
 
 Sin embargo, una buena comprensión del álgebra lineal es crucial para entender y trabajar con muchos algoritmos de machine learning, especialmente en el campo del deep learning. Por lo tanto, es importante que nos familiaricemos con estas ideas para poder aplicar correctamente estas técnicas en futuros proyectos.
 
-## Fundamentos
-### Escalares, vectores, matrices y tensores 
+## Escalares, vectores, matrices y tensores 
 
 - **Escalares:**  Es un solo número, a diferencia de la mayoría de los objetos estudiados en álgebra lineal, que suelen ser matrices de varios números. Estos se escriben en cursiva y en minúscula. Cuando los denotamos ademas se debe especificar qué tipo de número. Un ejemplo _$Sea\ s \in\ \mathbb{R}$, la pendiente de una recta_, es la definición de un escalar de valor real. 
 
@@ -29,7 +28,7 @@ $$\begin{align*}
            x_{1} \\
            x_{2} \\
            \vdots \\
-           x_{m}
+           x_{n}
          \end{bmatrix}
   \end{align*}$$
 
@@ -44,7 +43,7 @@ print(vector.shape) #(4,)
 
 - **Matrices:** Una matriz es una vector bidimensional de números, por lo que cada elemento se identifica por dos índices en lugar de sólo uno. Generalmente damos a las matrices nombres de variables en mayúsculas y en negrita, como $A$.
 
-    Si una matriz de valores reales A tiene una altura de m y una anchura de n , decimos que $A\ \in\ \mathbb{R}_{m \times n}$ Normalmente identificamos los elementos de una matriz utilizando su nombre en cursiva, pero no en negrita, y los índices se enumeran con comas de separación. Por ejemplo, $a_{1,1}$, es la entrada superior izquierda de $A$ y $a_{m,n}$ es la entrada inferior derecha.
+    Si una matriz de valores reales $A$ tiene una altura de m y una ancho de n , decimos que $A\ \in\ \mathbb{R}_{m \times n}$ Normalmente identificamos los elementos de una matriz utilizando su nombre en cursiva, pero no en negrita, y los índices se enumeran con comas de separación. Por ejemplo, $a_{1,1}$, es la entrada superior izquierda de $A$ y $a_{m,n}$ es la entrada inferior derecha.
 
 $$\begin{align*}
     A &= \begin{bmatrix}
@@ -87,7 +86,7 @@ print(tensor.shape) #(2,1,3)
 
 ## Multiplicación de matrices y vectores  
 
-El producto de las matrices $A$ y $B$ es una tercera matriz $C$.Para que este producto esté definido, $A$ debe tener el mismo número de columnas que $B$ tiene en filas. Si $A$ tiene forma $m \times n$ y $B$ tiene forma $n \times p$ , entonces $C$ tiene forma $m \times p$. 
+El producto de las matrices $A$ y $B$ es una tercera matriz $C$. Para que este producto esté definido, $A$ debe tener el mismo número de columnas que $B$ tiene en filas. Si $A$ tiene forma $m \times n$ y $B$ tiene forma $n \times p$, entonces $C$ tiene forma $m \times p$. 
 
 \begin{align*}
 A = \begin{bmatrix}
@@ -105,8 +104,6 @@ b_{n,1} & b_{n,2} & \cdots & b_{n,p}
 \end{bmatrix}_{n \times p}
 \end{align*}
 
-El producto \( C = A \times B \) se calcula como:
-
 \begin{align*}
 C &= \begin{bmatrix}
 c_{1,1} & c_{1,2} & \cdots & c_{1,p} \\
@@ -122,45 +119,156 @@ $$C_{i,j} = \sum_{k} A_{i,j}B_{i,j} $$
 
 El producto punto entre dos vectores $x$ e $y$ de la misma dimensionalidad es el producto matricial $x^T y$. Se puede pensar en el producto matricial $C = AB$ como calculando $C_{i,j}$ como el producto punto entre la fila $i$ de $A$ y la columna $j$ de $B$.
 
-**_Observación:_** El resultado del producto estándar de dos matrices no es una matriz que contiene el producto de los elementos individuales. Esta operación existe y se denomina producto Hadamard o element wise y es denotado por $A \odot B$
+!!! tip "**Observación**"
+    El resultado del producto estándar de dos matrices no es una matriz que contiene el producto de los elementos individuales. Esta operación existe y se denomina producto Hadamard o element wise y es denotado por $A \odot B$
+
 
 ### Propiedades básicas
 
-- La transposición de una matriz es la imagen espejada de la matriz a través de una línea diagonal, llamada diagonal principal, que discurre hacia abajo y a la derecha, a partir de su esquina superior izquierda. Se denota la transpuesta de la matrix $A$ como $A^T$
+- La transposición de una matriz es la imagen espejada de la matriz a través de una línea diagonal, llamada **_diagonal principal_**, que va hacia abajo y a la derecha, a partir de su esquina superior izquierda. Se denota la transpuesta de la matrix $A$ como $A^T$
+
+\[
+A = \begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\quad
+A^T = \begin{pmatrix}
+a_{11} & a_{21} & a_{31} \\
+a_{12} & a_{22} & a_{32} \\
+a_{13} & a_{23} & a_{33}
+\end{pmatrix}
+\]
 
 - Un escalar puede considerarse una matriz con un solo elemento. A partir de esto se puede ver que un escalar es su propia transposición, es decir, $a = a^T$.
 
 - Se pueden sumar matrices entre sí, siempre que tengan la misma forma, simplemente sumando sus elementos correspondientes $C=A+B$ donde $C_{i,j} = A_{i,j} + B_{i,j}$.
 
+\[
+A = \begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\quad
+B = \begin{pmatrix}
+b_{11} & b_{12} & b_{13} \\
+b_{21} & b_{22} & b_{23} \\
+b_{31} & b_{32} & b_{33}
+\end{pmatrix}
+\]
+
+\[
+C = \begin{pmatrix}
+a_{11} + b_{11} & a_{12} + b_{12} & a_{13} + b_{13} \\
+a_{21} + b_{21} & a_{22} + b_{22} & a_{23} + b_{23} \\
+a_{31} + b_{31} & a_{32} + b_{32} & a_{33} + b_{33}
+\end{pmatrix}
+\]
+
 - Se puede sumar un escalar a una matriz o multiplicar una matriz por un escalar, simplemente realizando esa operación en cada elemento de una matriz $D = a \cdot B + c$ donde
 $D_{i,j} = a \cdot B_{i,j} + c$.
 
-- El producto de matrices tiene diferentes propiedades. distributiva, asociativa, el transpuesto del producto y este no es conmutativa
+- El producto de matrices tiene diferentes propiedades.
 
-$$Distributiva\ \ A(B+C) = AB + AC\\
-Asociativa\ \ A(BC) = (AB)C\\
-Transpuesto\ \ (AB)^T = B^T A^T$$
+\begin{align*}
+\text{Distributiva:} & \quad A(B + C) = AB + AC \\
+\text{Asociativa:} & \quad A(BC) = (AB)C \\
+\text{Transpuesto:} & \quad (AB)^T = B^T A^T
+\end{align*}
+
+??? warning "La propiedad conmutativa no es posible en el producto de matrices"
+    Consideremos dos matrices \(2 \times 2\):
+
+    \[
+    A = \begin{bmatrix}
+    1 & 2 \\
+    3 & 4
+    \end{bmatrix}, \quad B = \begin{bmatrix}
+    5 & 6 \\
+    7 & 8
+    \end{bmatrix}
+    \]
+
+    Multiplicamos \(A\) por \(B\):
+
+    \[
+    A \cdot B = \begin{bmatrix}
+    1 & 2 \\
+    3 & 4
+    \end{bmatrix} \cdot \begin{bmatrix}
+    5 & 6 \\
+    7 & 8
+    \end{bmatrix} = \begin{bmatrix}
+    1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
+    3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8
+    \end{bmatrix} = \begin{bmatrix}
+    19 & 22 \\
+    43 & 50
+    \end{bmatrix}
+    \]
+
+    Ahora multiplicamos \(B\) por \(A\):
+
+    \[
+    B \cdot A = \begin{bmatrix}
+    5 & 6 \\
+    7 & 8
+    \end{bmatrix} \cdot \begin{bmatrix}
+    1 & 2 \\
+    3 & 4
+    \end{bmatrix} = \begin{bmatrix}
+    5 \cdot 1 + 6 \cdot 3 & 5 \cdot 2 + 6 \cdot 4 \\
+    7 \cdot 1 + 8 \cdot 3 & 7 \cdot 2 + 8 \cdot 4
+    \end{bmatrix} = \begin{bmatrix}
+    23 & 34 \\
+    31 & 46
+    \end{bmatrix}
+    \]
+
+    Comparamos los resultados:
+
+    \[
+    A \cdot B = \begin{bmatrix}
+    19 & 22 \\
+    43 & 50
+    \end{bmatrix}, \quad B \cdot A = \begin{bmatrix}
+    23 & 34 \\
+    31 & 46
+    \end{bmatrix}
+    \]
+
+    Dado que \(A \cdot B \neq B \cdot A\), concluimos que la multiplicación de matrices no es conmutativa.
 
 ## Matriz identidad e inversas
 
-- **Matriz identidad:** Es una matriz que no cambia ningún vector cuando se multiplica el vector por la matriz. Se denota la matriz identidad n dimensional como $I_{n}$. Formalmente $\forall x \in \mathbb{R}^n, I_nx = x$.
+- **La matriz identidad** \( I_n \) de tamaño \( n \times n \) es una matriz cuadrada donde todos los elementos de la diagonal principal son 1 y todos los demás elementos son 0. Formalmente, la matriz identidad \( I_n \) se define como:
 
-  La estructura de la matriz identidad es simple: todos los elementos de la diagonal principal son $1$ mientras que todos los otro elementos son $0$
+    \[
+    I_n = \begin{pmatrix}
+    1 & 0 & 0 & \cdots & 0 \\
+    0 & 1 & 0 & \cdots & 0 \\
+    0 & 0 & 1 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}
+    \]
 
-$$\begin{align*}
- A &= \begin{bmatrix}
-    1 & 0 & \cdots & 0 \\
-    0 & 1 & \cdots & 0 \\
-   \vdots  & \vdots  & \ddots & \vdots  \\
-    0 & 0 & \cdots & 1
- \end{bmatrix}
-\end{align*}$$
+    Además, para cualquier vector $(x \in \mathbb{R}^n )$, se cumple que:
 
-- **Matriz inversa:** La inversa de la matriz $A$ es denotada por $A^{-1}$ y esta definida por $$A^{-1} A = I_{n}$$
-  
-  Por supuesto, este proceso depende de que sea posible encontrar $A^{-1}$. Cuando $A^{-1}$ existe, existen varios algoritmos diferentes para encontrarla en forma cerrada.
+    \[
+    I_n x = x
+    \]
 
-  Utilizando la matriz inversa se puede resolver la ecuación lineal $Ax = b$ con el procedimiento
+Una matriz cuadrada \( A \) de orden \( n \) se dice que es invertible, no singular, no degenerada o regular si existe otra matriz cuadrada de orden \( n \), llamada **matriz inversa** de \( A \) y denotada por \( A^{-1} \), tal que:
+
+\[
+A \cdot A^{-1} = A^{-1} \cdot A = I_n
+\]
+
+
+Utilizando la matriz inversa se puede resolver la ecuación lineal $Ax = b$ con el procedimiento
 
 $$\begin{align*}
  Ax &= b\\
@@ -171,39 +279,90 @@ $$\begin{align*}
 
 ## Dependencia lineal y espacio vectorial (span)
 
-- **Combinación lineal:** Es la suma de los productos de un escalar $c_i$ con un conjunto de vectores $\{v^{(1)}, v^{(2)}, \cdots ,v^{(i)}\}$, es decir, esta definido por la expresión 
+**Combinación lineal:** Es la suma de los productos de un escalar \( c_i \) con un conjunto de vectores \( \{v^{(1)}, v^{(2)}, \cdots, v^{(i)}\} \). Formalmente, una combinación lineal se define por la expresión:
 
-$$\sum_i c_iv^{(i)} $$
+\[
+\sum_{i} c_i v^{(i)}
+\]
 
-$$
-\begin{align*}
-  \begin{pmatrix}
+Donde \( c_i \) son escalares y \( v^{(i)} \) son vectores.
+
+??? example "Ejemplo"
+    Consideremos los vectores \( \begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix} \) y \( \begin{pmatrix} 6 \\ 2 \\ 9 \end{pmatrix} \), y los escalares \( 2 \) y \( 3 \). La combinación lineal de estos vectores con estos escalares se puede escribir como:
+
+    \[
+    \begin{pmatrix}
     20 \\
     12 \\
     37
-  \end{pmatrix} = 
-  
-  2  \begin{pmatrix}
+    \end{pmatrix} =
+    2 \begin{pmatrix}
     1 \\
     3 \\
     5
-  \end{pmatrix} +
-
-  3  \begin{pmatrix}
+    \end{pmatrix} +
+    3 \begin{pmatrix}
     6 \\
     2 \\
     9
-  \end{pmatrix}
-\end{align*}$$
+    \end{pmatrix}
+    \]
 
-- **Dependencia lineal:** Es la redundancia de un vector entre dos vectores de una matriz. Formalmente se dice que un vector es linealmente dependiente si existe un vector que sea una combinación lineal de este. En caso de no existir se dice que el vector es linealmente independiente.
+    En este ejemplo, cada vector se multiplica por su respectivo escalar y luego se suman los resultados. La combinación lineal de los vectores \( \begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix} \) y \( \begin{pmatrix} 6 \\ 2 \\ 9 \end{pmatrix} \) con los escalares \( 2 \) y \( 3 \) da como resultado el vector \( \begin{pmatrix} 20 \\ 12 \\ 37 \end{pmatrix} \).
+
+**Dependencia lineal:** Es la redundancia de un vector entre dos vectores de una matriz. Formalmente, se dice que un vector es linealmente dependiente si existe un vector que sea una combinación lineal de este. En caso de no existir, se dice que el vector es linealmente independiente.
+
+!!! Note "Definición Formal"
+    Dado un conjunto de vectores \( \{v^{(1)}, v^{(2)}, \cdots, v^{(n)}\} \) en un espacio vectorial \( V \), se dice que un vector \( v^{(i)} \) es linealmente dependiente si existe una combinación lineal no trivial de estos vectores que da como resultado el vector cero. Es decir, existen escalares \( c_1, c_2, \ldots, c_n \), no todos cero, tales que:
+
+    \[
+    c_1 v^{(1)} + c_2 v^{(2)} + \cdots + c_n v^{(n)} = 0
+    \]
+
+    Si no existe tal combinación no trivial, entonces los vectores son linealmente independientes.
+
+??? example Ejemplo
+
+    Consideremos los vectores \( \begin{pmatrix} 1 \\ 2 \end{pmatrix} \) y \( \begin{pmatrix} 3 \\ 6 \end{pmatrix} \). Para determinar si estos vectores son linealmente dependientes o independientes, intentamos encontrar una combinación lineal no trivial que dé como resultado el vector cero:
+
+    \[
+    c_1 \begin{pmatrix} 1 \\ 2 \end{pmatrix} + c_2 \begin{pmatrix} 3 \\ 6 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+    \]
+
+    Esto se traduce en el sistema de ecuaciones lineales:
+
+    \[
+    \begin{cases}
+    c_1 + 3c_2 = 0 \\
+    2c_1 + 6c_2 = 0
+    \end{cases}
+    \]
+
+    Simplificando la segunda ecuación, obtenemos:
+
+    \[
+    2c_1 + 6c_2 = 0 \implies c_1 + 3c_2 = 0
+    \]
+
+    Como ambas ecuaciones son idénticas, tenemos una única ecuación:
+
+    \[
+    c_1 + 3c_2 = 0
+    \]
+
+    Esta ecuación tiene infinitas soluciones de la forma \( c_1 = -3c_2 \). Por lo tanto, los vectores \( \begin{pmatrix} 1 \\ 2 \end{pmatrix} \) y \( \begin{pmatrix} 3 \\ 6 \end{pmatrix} \) son linealmente dependientes.
+
+#### Conclusión
+
+La dependencia lineal implica que uno de los vectores puede ser expresado como una combinación lineal de los otros. Esto significa que los vectores no proporcionan información adicional y, por lo tanto, son redundantes en el contexto de un espacio vectorial.
 
 ## Normas
 
-La norma $L^p$ se define formalmente como:
+Las normas $L^p$ son una familia de normas parametrizadas por un valor $p \geq 1$. La norma $L^p$ de un vector $x$ se define como:
+
 $$ ||x||_p = \left( \sum_i |x_i|^p\right)^{\frac{1}{p}}\ para\ p \in \mathbb{R},p \geq 1$$
 
-Las normas, incluida la norma L p, son funciones que asignan vectores a valores no negativos. A nivel intuitivo, la norma de un vector $x$ mide la distancia del origen al punto $x$. En términos más rigurosos, una norma es cualquier función $f$ que cumple las siguientes propiedades:
+Las normas, incluida la norma $L^p$, son funciones que asignan vectores a valores no negativos. A nivel intuitivo, la norma de un vector $x$ mide la distancia del origen al punto $x$. En términos más rigurosos, una norma es cualquier función $f$ que cumple las siguientes propiedades:
 
 - $f(x) = 0 \implies x = 0$
 - $f(x+y) \leq f(x) + f(y)$ (Desigualdad triangular)
@@ -213,15 +372,50 @@ Un norma que surge comúnmente en machine learning es la norma $L^{\infty}$, tam
 
 ## Tipos especiales de matrices y vectores 
 
-- **Matriz simétrica:** Es cualquier matriz que su transpuesta sea igual a la matriz $A = A^T$.
-   
-   Las matrices simétricas suelen surgir cuando los elementos se generan mediante alguna función de dos argumentos que no depende del orden de los argumentos. Por ejemplo si $A$ es una matriz de medidas de distancia, en la que $A_{i,j}$ da la distancia del punto $i$ al punto $j$, entonces $A_{i,j} = A_{j,i}$ porque las funciones de distancia son simétricas.
+- **Matriz simétrica:** Es cualquier matriz que su transpuesta sea igual a la matriz $A^T = A$. Las matrices simétricas suelen surgir cuando los elementos se generan mediante alguna función de dos argumentos que no depende del orden de los argumentos.
+
+??? exmaple "Ejemplo"
+
+    Consideremos una matriz de medidas de distancia entre cuatro puntos \( P_1, P_2, P_3 \) y \( P_4 \). Supongamos que las distancias entre los puntos son las siguientes:
+
+    - \( d(P_1, P_2) = 3 \)
+    - \( d(P_1, P_3) = 4 \)
+    - \( d(P_1, P_4) = 5 \)
+    - \( d(P_2, P_3) = 2 \)
+    - \( d(P_2, P_4) = 6 \)
+    - \( d(P_3, P_4) = 7 \)
+
+    La matriz de distancia \( A \) se puede representar como:
+
+    \[
+    A = \begin{pmatrix}
+    0 & 3 & 4 & 5 \\
+    3 & 0 & 2 & 6 \\
+    4 & 2 & 0 & 7 \\
+    5 & 6 & 7 & 0
+    \end{pmatrix}
+    \]
+
+    Donde \( A_{i,j} \) representa la distancia entre el punto \( i \) y el punto \( j \).
+
+    Para verificar que \( A \) es simétrica, calculamos su transpuesta \( A^T \):
+
+    \[
+    A^T = \begin{pmatrix}
+    0 & 3 & 4 & 5 \\
+    3 & 0 & 2 & 6 \\
+    4 & 2 & 0 & 7 \\
+    5 & 6 & 7 & 0
+    \end{pmatrix}
+    \]
+
+    Como se puede observar, \( A^T = A \), lo que demuestra que la matriz de distancia \( A \) es simétrica.
 
 - **Vector unitario:**  Es cuando el vector tiene norma con valor igual a 1 $||x||_2 = 1$
 
-- **Vectores ortogonales:** Dos vectores $x$, $y$ son ortogonales si $x^Ty = 0$. Si ambos vectores tienen norma distinta de cero, significa que forman un ángulo de $90$ grados entre sí. En $\mathbb{R}_n$, como máximo $n$ vectores pueden ser mutuamente ortogonales con norma distinta de cero. Si los vectores no sólo son ortogonales, sino que además tienen norma unitaria, se llaman ortonormales.
+- **Vectores ortogonales:** Dos vectores $x$ e $y$ son ortogonales si $x^Ty = 0$. Si ambos vectores tienen norma distinta de cero, significa que forman un ángulo de $90$ grados entre sí. En $\mathbb{R}_n$, como máximo $n$ vectores pueden ser mutuamente ortogonales con norma distinta de cero. Si los vectores no sólo son ortogonales, sino que además tienen norma unitaria, se llaman ortonormales.
 
-- **Matriz ortogonal:** Es una matriz cuadrada cuyas filas son y columnas son mutuamente ortonormales. $A^TA  = AA^T = I$. Esto implica que $A^{-1} = A^T$
+- **Matriz ortogonal:** Es una matriz cuadrada cuyas filas y columnas son mutuamente ortonormales. $A^TA  = AA^T = I$. Esto implica que $A^{-1} = A^T$
 
 ## Descomposición en valores propios de una matriz
 
