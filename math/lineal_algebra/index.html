@@ -1,0 +1,1161 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Soy Yeriel, ML engineer and Data scientist, y estas son mis notas">
+      
+      
+        <meta name="author" content="Yeriel Paz Ureta">
+      
+      
+        <link rel="canonical" href="https://yeriel.github.io/math/lineal_algebra/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Algebra Lineal - DS & MLE Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-LS5X4V2NKZ"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-LS5X4V2NKZ",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-LS5X4V2NKZ",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#algebra-lineal" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DS &amp; MLE Notes" class="md-header__button md-logo" aria-label="DS & MLE Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DS & MLE Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Algebra Lineal
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yeriel/yeriel.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeriel/yeriel.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DS &amp; MLE Notes" class="md-nav__button md-logo" aria-label="DS & MLE Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DS & MLE Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yeriel/yeriel.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeriel/yeriel.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Matematicas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Matematicas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Algebra Lineal
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Algebra Lineal
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#escalares-vectores-matrices-y-tensores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escalares, vectores, matrices y tensores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplicacion-de-matrices-y-vectores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiplicación de matrices y vectores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiplicación de matrices y vectores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propiedades básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-identidad-e-inversas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matriz identidad e inversas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-lineal-y-espacio-vectorial-span" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencia lineal y espacio vectorial (span)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependencia lineal y espacio vectorial (span)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusión
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-especiales-de-matrices-y-vectores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos especiales de matrices y vectores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descomposicion-en-valores-propios-de-una-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descomposición en valores propios de una matriz
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descomposicion-en-valores-singulares-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descomposición en valores singulares (SVD)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pseudoinverso-de-moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pseudoinverso de Moore-Penrose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operador-traza" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador traza
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determinante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Determinante
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-y-recursos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referencias y recursos útiles
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#escalares-vectores-matrices-y-tensores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escalares, vectores, matrices y tensores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplicacion-de-matrices-y-vectores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiplicación de matrices y vectores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multiplicación de matrices y vectores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propiedades básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-identidad-e-inversas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matriz identidad e inversas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-lineal-y-espacio-vectorial-span" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencia lineal y espacio vectorial (span)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependencia lineal y espacio vectorial (span)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusión
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-especiales-de-matrices-y-vectores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos especiales de matrices y vectores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descomposicion-en-valores-propios-de-una-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descomposición en valores propios de una matriz
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descomposicion-en-valores-singulares-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descomposición en valores singulares (SVD)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pseudoinverso-de-moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pseudoinverso de Moore-Penrose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operador-traza" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador traza
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determinante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Determinante
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-y-recursos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referencias y recursos útiles
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="algebra-lineal">Algebra Lineal</h1>
+<p>El álgebra lineal es una rama de las matemáticas que se utiliza ampliamente en la ciencia y la ingeniería. A diferencia de otras ramas de las matemáticas que se centran en números discretos, el álgebra lineal trabaja con conceptos continuos. Esto puede ser un desafío para muchos, ya que no están familiarizados con estos conceptos.</p>
+<p>Sin embargo, una buena comprensión del álgebra lineal es crucial para entender y trabajar con muchos algoritmos de machine learning, especialmente en el campo del deep learning. Por lo tanto, es importante que nos familiaricemos con estas ideas para poder aplicar correctamente estas técnicas en futuros proyectos.</p>
+<h2 id="escalares-vectores-matrices-y-tensores">Escalares, vectores, matrices y tensores</h2>
+<ul>
+<li><strong>Escalares:</strong>  Es un solo número, a diferencia de la mayoría de los objetos estudiados en álgebra lineal, que suelen ser matrices de varios números. Estos se escriben en cursiva y en minúscula. Cuando los denotamos ademas se debe especificar qué tipo de número. Un ejemplo <em><span class="arithmatex">\(Sea\ s \in\ \mathbb{R}\)</span>, la pendiente de una recta</em>, es la definición de un escalar de valor real. </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Escalar</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Escalar: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#3.14</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1">#()</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>Vectores:</strong> En general, un vector es un objeto matemático especial que puede ser multiplicado por un escalar y/o multiplicado por otro vector, y el resultado siempre será un objeto del mismo tipo que el original. Una forma más concreta de ver esto es desde el enfoque de las ciencias de la computación, donde un vector se puede considerar como una matriz de números. Los números están dispuestos en un orden específico, y podemos identificar cada número individual por su índice en ese orden. Normalmente, los vectores se nombran con letras minúsculas y en negrita, como <span class="arithmatex">\(\mathbf{x}\)</span>.</p>
+<p>Los elementos del vector se identifican escribiendo su nombre en cursiva, con un subíndice. El primer elemento de <span class="arithmatex">\(x\)</span> es <span class="arithmatex">\(x_{1}\)</span> , el segundo elemento es <span class="arithmatex">\(x_{2}\)</span> y así sucesivamente. </p>
+<p>Si cada elemento está en <span class="arithmatex">\(\mathbb{R}\)</span>, y el vector tiene n elementos, entonces el vector está en el conjunto formado por el producto cartesiano de <span class="arithmatex">\(\mathbb{R}\)</span>, n veces, denominado <span class="arithmatex">\(\mathbb{R^n}\)</span>.</p>
+</li>
+</ul>
+<div class="arithmatex">\[\begin{align*}
+    x &amp;= \begin{bmatrix}
+           x_{1} \\
+           x_{2} \\
+           \vdots \\
+           x_{n}
+         \end{bmatrix}
+  \end{align*}\]</div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Vector</span>
+<span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Vector: </span><span class="si">{</span><span class="n">vector</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#[1. 2. 3. 4.]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1">#(4,)</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>Matrices:</strong> Una matriz es una vector bidimensional de números, por lo que cada elemento se identifica por dos índices en lugar de sólo uno. Generalmente damos a las matrices nombres de variables en mayúsculas y en negrita, como <span class="arithmatex">\(A\)</span>.</p>
+<p>Si una matriz de valores reales <span class="arithmatex">\(A\)</span> tiene una altura de m y una ancho de n , decimos que <span class="arithmatex">\(A\ \in\ \mathbb{R}_{m \times n}\)</span> Normalmente identificamos los elementos de una matriz utilizando su nombre en cursiva, pero no en negrita, y los índices se enumeran con comas de separación. Por ejemplo, <span class="arithmatex">\(a_{1,1}\)</span>, es la entrada superior izquierda de <span class="arithmatex">\(A\)</span> y <span class="arithmatex">\(a_{m,n}\)</span> es la entrada inferior derecha.</p>
+</li>
+</ul>
+<div class="arithmatex">\[\begin{align*}
+    A &amp;= \begin{bmatrix}
+      a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,m} \\
+      a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,m} \\
+      \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+      a_{m,1} &amp; a_{m,2} &amp; \cdots &amp; a_{m,m}
+    \end{bmatrix}
+\end{align*}\]</div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Matriz</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Matriz:</span><span class="si">{</span><span class="n">matrix</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;[[ 1.  2.  3.]</span>
+<span class="sd">   [ 4.  5.  6.]</span>
+<span class="sd">   [ 7.  8.  9.]</span>
+<span class="sd">   [10. 11. 12.]]&#39;&#39;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1">#(4, 3)</span>
+</code></pre></div>
+<ul>
+<li><strong>Tensores:</strong> Es el caso general, una matriz de números dispuestos en una cuadrícula regular con un número variable de ejes. Denotamos un tensor llamado <span class="arithmatex">\(A\)</span>. Identificamos el elemento de <span class="arithmatex">\(A\)</span> en las coordenadas <span class="arithmatex">\(( i, j, k )\)</span> escribiendo <span class="arithmatex">\(A_{i,j,k}\)</span></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Tensor</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tensor:</span><span class="si">{</span><span class="n">tensor</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;[</span>
+<span class="sd">    [[1. 2. 3.]]</span>
+<span class="sd">    [[5. 6. 7.]]</span>
+<span class="sd">    ]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1">#(2,1,3)</span>
+</code></pre></div>
+<h2 id="multiplicacion-de-matrices-y-vectores">Multiplicación de matrices y vectores</h2>
+<p>El producto de las matrices <span class="arithmatex">\(A\)</span> y <span class="arithmatex">\(B\)</span> es una tercera matriz <span class="arithmatex">\(C\)</span>. Para que este producto esté definido, <span class="arithmatex">\(A\)</span> debe tener el mismo número de columnas que <span class="arithmatex">\(B\)</span> tiene en filas. Si <span class="arithmatex">\(A\)</span> tiene forma <span class="arithmatex">\(m \times n\)</span> y <span class="arithmatex">\(B\)</span> tiene forma <span class="arithmatex">\(n \times p\)</span>, entonces <span class="arithmatex">\(C\)</span> tiene forma <span class="arithmatex">\(m \times p\)</span>. </p>
+<div class="arithmatex">\[\begin{align*}
+A = \begin{bmatrix}
+a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n} \\
+a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2,n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{m,1} &amp; a_{m,2} &amp; \cdots &amp; a_{m,n}
+\end{bmatrix}_{m \times n}
+\hspace{0.5cm}
+B = \begin{bmatrix}
+b_{1,1} &amp; b_{1,2} &amp; \cdots &amp; b_{1,p} \\
+b_{2,1} &amp; b_{2,2} &amp; \cdots &amp; b_{2,p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+b_{n,1} &amp; b_{n,2} &amp; \cdots &amp; b_{n,p}
+\end{bmatrix}_{n \times p}
+\end{align*}\]</div>
+<div class="arithmatex">\[\begin{align*}
+C &amp;= \begin{bmatrix}
+c_{1,1} &amp; c_{1,2} &amp; \cdots &amp; c_{1,p} \\
+c_{2,1} &amp; c_{2,2} &amp; \cdots &amp; c_{2,p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+c_{m,1} &amp; c_{m,2} &amp; \cdots &amp; c_{m,p}
+\end{bmatrix}_{m \times p}
+\end{align*}\]</div>
+<p>Se puede escribir el producto matricial simplemente colocando dos o más matrices juntas <span class="arithmatex">\(C = AB\)</span> donde la operación del producto esta definida como:</p>
+<div class="arithmatex">\[C_{i,j} = \sum_{k} A_{i,j}B_{i,j} \]</div>
+<p>El producto punto entre dos vectores <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span> de la misma dimensionalidad es el producto matricial <span class="arithmatex">\(x^T y\)</span>. Se puede pensar en el producto matricial <span class="arithmatex">\(C = AB\)</span> como calculando <span class="arithmatex">\(C_{i,j}\)</span> como el producto punto entre la fila <span class="arithmatex">\(i\)</span> de <span class="arithmatex">\(A\)</span> y la columna <span class="arithmatex">\(j\)</span> de <span class="arithmatex">\(B\)</span>.</p>
+<div class="admonition tip">
+<p class="admonition-title"><strong>Observación</strong></p>
+<p>El resultado del producto estándar de dos matrices no es una matriz que contiene el producto de los elementos individuales. Esta operación existe y se denomina producto Hadamard o element wise y es denotado por <span class="arithmatex">\(A \odot B\)</span></p>
+</div>
+<h3 id="propiedades-basicas">Propiedades básicas</h3>
+<ul>
+<li>La transposición de una matriz es la imagen espejada de la matriz a través de una línea diagonal, llamada <strong><em>diagonal principal</em></strong>, que va hacia abajo y a la derecha, a partir de su esquina superior izquierda. Se denota la transpuesta de la matrix <span class="arithmatex">\(A\)</span> como <span class="arithmatex">\(A^T\)</span></li>
+</ul>
+<div class="arithmatex">\[
+A = \begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{pmatrix}
+\quad
+A^T = \begin{pmatrix}
+a_{11} &amp; a_{21} &amp; a_{31} \\
+a_{12} &amp; a_{22} &amp; a_{32} \\
+a_{13} &amp; a_{23} &amp; a_{33}
+\end{pmatrix}
+\]</div>
+<ul>
+<li>
+<p>Un escalar puede considerarse una matriz con un solo elemento. A partir de esto se puede ver que un escalar es su propia transposición, es decir, <span class="arithmatex">\(a = a^T\)</span>.</p>
+</li>
+<li>
+<p>Se pueden sumar matrices entre sí, siempre que tengan la misma forma, simplemente sumando sus elementos correspondientes <span class="arithmatex">\(C=A+B\)</span> donde <span class="arithmatex">\(C_{i,j} = A_{i,j} + B_{i,j}\)</span>.</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+A = \begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{pmatrix}
+\quad
+B = \begin{pmatrix}
+b_{11} &amp; b_{12} &amp; b_{13} \\
+b_{21} &amp; b_{22} &amp; b_{23} \\
+b_{31} &amp; b_{32} &amp; b_{33}
+\end{pmatrix}
+\]</div>
+<div class="arithmatex">\[
+C = \begin{pmatrix}
+a_{11} + b_{11} &amp; a_{12} + b_{12} &amp; a_{13} + b_{13} \\
+a_{21} + b_{21} &amp; a_{22} + b_{22} &amp; a_{23} + b_{23} \\
+a_{31} + b_{31} &amp; a_{32} + b_{32} &amp; a_{33} + b_{33}
+\end{pmatrix}
+\]</div>
+<ul>
+<li>
+<p>Se puede sumar un escalar a una matriz o multiplicar una matriz por un escalar, simplemente realizando esa operación en cada elemento de una matriz <span class="arithmatex">\(D = a \cdot B + c\)</span> donde
+<span class="arithmatex">\(D_{i,j} = a \cdot B_{i,j} + c\)</span>.</p>
+</li>
+<li>
+<p>El producto de matrices tiene diferentes propiedades.</p>
+</li>
+</ul>
+<div class="arithmatex">\[\begin{align*}
+\text{Distributiva:} &amp; \quad A(B + C) = AB + AC \\
+\text{Asociativa:} &amp; \quad A(BC) = (AB)C \\
+\text{Transpuesto:} &amp; \quad (AB)^T = B^T A^T
+\end{align*}\]</div>
+<details class="warning">
+<summary>La propiedad conmutativa no es posible en el producto de matrices</summary>
+<p>Consideremos dos matrices <span class="arithmatex">\(2 \times 2\)</span>:</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{bmatrix}, \quad B = \begin{bmatrix}
+5 &amp; 6 \\
+7 &amp; 8
+\end{bmatrix}
+\]</div>
+<p>Multiplicamos <span class="arithmatex">\(A\)</span> por <span class="arithmatex">\(B\)</span>:</p>
+<div class="arithmatex">\[
+A \cdot B = \begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{bmatrix} \cdot \begin{bmatrix}
+5 &amp; 6 \\
+7 &amp; 8
+\end{bmatrix} = \begin{bmatrix}
+1 \cdot 5 + 2 \cdot 7 &amp; 1 \cdot 6 + 2 \cdot 8 \\
+3 \cdot 5 + 4 \cdot 7 &amp; 3 \cdot 6 + 4 \cdot 8
+\end{bmatrix} = \begin{bmatrix}
+19 &amp; 22 \\
+43 &amp; 50
+\end{bmatrix}
+\]</div>
+<p>Ahora multiplicamos <span class="arithmatex">\(B\)</span> por <span class="arithmatex">\(A\)</span>:</p>
+<div class="arithmatex">\[
+B \cdot A = \begin{bmatrix}
+5 &amp; 6 \\
+7 &amp; 8
+\end{bmatrix} \cdot \begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4
+\end{bmatrix} = \begin{bmatrix}
+5 \cdot 1 + 6 \cdot 3 &amp; 5 \cdot 2 + 6 \cdot 4 \\
+7 \cdot 1 + 8 \cdot 3 &amp; 7 \cdot 2 + 8 \cdot 4
+\end{bmatrix} = \begin{bmatrix}
+23 &amp; 34 \\
+31 &amp; 46
+\end{bmatrix}
+\]</div>
+<p>Comparamos los resultados:</p>
+<div class="arithmatex">\[
+A \cdot B = \begin{bmatrix}
+19 &amp; 22 \\
+43 &amp; 50
+\end{bmatrix}, \quad B \cdot A = \begin{bmatrix}
+23 &amp; 34 \\
+31 &amp; 46
+\end{bmatrix}
+\]</div>
+<p>Dado que <span class="arithmatex">\(A \cdot B \neq B \cdot A\)</span>, concluimos que la multiplicación de matrices no es conmutativa.</p>
+</details>
+<h2 id="matriz-identidad-e-inversas">Matriz identidad e inversas</h2>
+<ul>
+<li>
+<p><strong>La matriz identidad</strong> <span class="arithmatex">\( I_n \)</span> de tamaño <span class="arithmatex">\( n \times n \)</span> es una matriz cuadrada donde todos los elementos de la diagonal principal son 1 y todos los demás elementos son 0. Formalmente, la matriz identidad <span class="arithmatex">\( I_n \)</span> se define como:</p>
+<div class="arithmatex">\[
+I_n = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1
+\end{pmatrix}
+\]</div>
+<p>Además, para cualquier vector <span class="arithmatex">\((x \in \mathbb{R}^n )\)</span>, se cumple que:</p>
+<div class="arithmatex">\[
+I_n x = x
+\]</div>
+</li>
+</ul>
+<p>Una matriz cuadrada <span class="arithmatex">\( A \)</span> de orden <span class="arithmatex">\( n \)</span> se dice que es invertible, no singular, no degenerada o regular si existe otra matriz cuadrada de orden <span class="arithmatex">\( n \)</span>, llamada <strong>matriz inversa</strong> de <span class="arithmatex">\( A \)</span> y denotada por <span class="arithmatex">\( A^{-1} \)</span>, tal que:</p>
+<div class="arithmatex">\[
+A \cdot A^{-1} = A^{-1} \cdot A = I_n
+\]</div>
+<p>Utilizando la matriz inversa se puede resolver la ecuación lineal <span class="arithmatex">\(Ax = b\)</span> con el procedimiento</p>
+<div class="arithmatex">\[\begin{align*}
+ Ax &amp;= b\\
+ A^{-1}Ax &amp;= A^{-1}b\\
+ I_{n}x &amp;= A^{-1}b\\
+ x &amp;= A^{-1}b
+\end{align*}\]</div>
+<h2 id="dependencia-lineal-y-espacio-vectorial-span">Dependencia lineal y espacio vectorial (span)</h2>
+<p><strong>Combinación lineal:</strong> Es la suma de los productos de un escalar <span class="arithmatex">\( c_i \)</span> con un conjunto de vectores <span class="arithmatex">\( \{v^{(1)}, v^{(2)}, \cdots, v^{(i)}\} \)</span>. Formalmente, una combinación lineal se define por la expresión:</p>
+<div class="arithmatex">\[
+\sum_{i} c_i v^{(i)}
+\]</div>
+<p>Donde <span class="arithmatex">\( c_i \)</span> son escalares y <span class="arithmatex">\( v^{(i)} \)</span> son vectores.</p>
+<details class="example">
+<summary>Ejemplo</summary>
+<p>Consideremos los vectores <span class="arithmatex">\( \begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix} \)</span> y <span class="arithmatex">\( \begin{pmatrix} 6 \\ 2 \\ 9 \end{pmatrix} \)</span>, y los escalares <span class="arithmatex">\( 2 \)</span> y <span class="arithmatex">\( 3 \)</span>. La combinación lineal de estos vectores con estos escalares se puede escribir como:</p>
+<div class="arithmatex">\[
+\begin{pmatrix}
+20 \\
+12 \\
+37
+\end{pmatrix} =
+2 \begin{pmatrix}
+1 \\
+3 \\
+5
+\end{pmatrix} +
+3 \begin{pmatrix}
+6 \\
+2 \\
+9
+\end{pmatrix}
+\]</div>
+<p>En este ejemplo, cada vector se multiplica por su respectivo escalar y luego se suman los resultados. La combinación lineal de los vectores <span class="arithmatex">\( \begin{pmatrix} 1 \\ 3 \\ 5 \end{pmatrix} \)</span> y <span class="arithmatex">\( \begin{pmatrix} 6 \\ 2 \\ 9 \end{pmatrix} \)</span> con los escalares <span class="arithmatex">\( 2 \)</span> y <span class="arithmatex">\( 3 \)</span> da como resultado el vector <span class="arithmatex">\( \begin{pmatrix} 20 \\ 12 \\ 37 \end{pmatrix} \)</span>.</p>
+</details>
+<p><strong>Dependencia lineal:</strong> Es la redundancia de un vector entre dos vectores de una matriz. Formalmente, se dice que un vector es linealmente dependiente si existe un vector que sea una combinación lineal de este. En caso de no existir, se dice que el vector es linealmente independiente.</p>
+<div class="admonition note">
+<p class="admonition-title">Definición Formal</p>
+<p>Dado un conjunto de vectores <span class="arithmatex">\( \{v^{(1)}, v^{(2)}, \cdots, v^{(n)}\} \)</span> en un espacio vectorial <span class="arithmatex">\( V \)</span>, se dice que un vector <span class="arithmatex">\( v^{(i)} \)</span> es linealmente dependiente si existe una combinación lineal no trivial de estos vectores que da como resultado el vector cero. Es decir, existen escalares <span class="arithmatex">\( c_1, c_2, \ldots, c_n \)</span>, no todos cero, tales que:</p>
+<div class="arithmatex">\[
+c_1 v^{(1)} + c_2 v^{(2)} + \cdots + c_n v^{(n)} = 0
+\]</div>
+<p>Si no existe tal combinación no trivial, entonces los vectores son linealmente independientes.</p>
+</div>
+<details class="example ejemplo">
+<summary>Example</summary>
+<p>Consideremos los vectores <span class="arithmatex">\( \begin{pmatrix} 1 \\ 2 \end{pmatrix} \)</span> y <span class="arithmatex">\( \begin{pmatrix} 3 \\ 6 \end{pmatrix} \)</span>. Para determinar si estos vectores son linealmente dependientes o independientes, intentamos encontrar una combinación lineal no trivial que dé como resultado el vector cero:</p>
+<div class="arithmatex">\[
+c_1 \begin{pmatrix} 1 \\ 2 \end{pmatrix} + c_2 \begin{pmatrix} 3 \\ 6 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\]</div>
+<p>Esto se traduce en el sistema de ecuaciones lineales:</p>
+<div class="arithmatex">\[
+\begin{cases}
+c_1 + 3c_2 = 0 \\
+2c_1 + 6c_2 = 0
+\end{cases}
+\]</div>
+<p>Simplificando la segunda ecuación, obtenemos:</p>
+<div class="arithmatex">\[
+2c_1 + 6c_2 = 0 \implies c_1 + 3c_2 = 0
+\]</div>
+<p>Como ambas ecuaciones son idénticas, tenemos una única ecuación:</p>
+<div class="arithmatex">\[
+c_1 + 3c_2 = 0
+\]</div>
+<p>Esta ecuación tiene infinitas soluciones de la forma <span class="arithmatex">\( c_1 = -3c_2 \)</span>. Por lo tanto, los vectores <span class="arithmatex">\( \begin{pmatrix} 1 \\ 2 \end{pmatrix} \)</span> y <span class="arithmatex">\( \begin{pmatrix} 3 \\ 6 \end{pmatrix} \)</span> son linealmente dependientes.</p>
+</details>
+<h4 id="conclusion">Conclusión</h4>
+<p>La dependencia lineal implica que uno de los vectores puede ser expresado como una combinación lineal de los otros. Esto significa que los vectores no proporcionan información adicional y, por lo tanto, son redundantes en el contexto de un espacio vectorial.</p>
+<h2 id="normas">Normas</h2>
+<p>Las normas <span class="arithmatex">\(L^p\)</span> son una familia de normas parametrizadas por un valor <span class="arithmatex">\(p \geq 1\)</span>. La norma <span class="arithmatex">\(L^p\)</span> de un vector <span class="arithmatex">\(x\)</span> se define como:</p>
+<div class="arithmatex">\[ ||x||_p = \left( \sum_i |x_i|^p\right)^{\frac{1}{p}}\ para\ p \in \mathbb{R},p \geq 1\]</div>
+<p>Las normas, incluida la norma <span class="arithmatex">\(L^p\)</span>, son funciones que asignan vectores a valores no negativos. A nivel intuitivo, la norma de un vector <span class="arithmatex">\(x\)</span> mide la distancia del origen al punto <span class="arithmatex">\(x\)</span>. En términos más rigurosos, una norma es cualquier función <span class="arithmatex">\(f\)</span> que cumple las siguientes propiedades:</p>
+<ul>
+<li><span class="arithmatex">\(f(x) = 0 \implies x = 0\)</span></li>
+<li><span class="arithmatex">\(f(x+y) \leq f(x) + f(y)\)</span> (Desigualdad triangular)</li>
+<li><span class="arithmatex">\(\forall \alpha \in \mathbb{R}, f(\alpha x) = |\alpha|f(x)\)</span></li>
+</ul>
+<p>Un norma que surge comúnmente en machine learning es la norma <span class="arithmatex">\(L^{\infty}\)</span>, también conocida como norma máxima. Esta norma se simplifica al valor absoluto del elemento con la mayor magnitud en el vector. <span class="arithmatex">\(||x||_{\infty} = max_{i} |x_i|\)</span></p>
+<h2 id="tipos-especiales-de-matrices-y-vectores">Tipos especiales de matrices y vectores</h2>
+<ul>
+<li><strong>Matriz simétrica:</strong> Es cualquier matriz que su transpuesta sea igual a la matriz <span class="arithmatex">\(A^T = A\)</span>. Las matrices simétricas suelen surgir cuando los elementos se generan mediante alguna función de dos argumentos que no depende del orden de los argumentos.</li>
+</ul>
+<details class="exmaple">
+<summary>Ejemplo</summary>
+<p>Consideremos una matriz de medidas de distancia entre cuatro puntos <span class="arithmatex">\( P_1, P_2, P_3 \)</span> y <span class="arithmatex">\( P_4 \)</span>. Supongamos que las distancias entre los puntos son las siguientes:</p>
+<ul>
+<li><span class="arithmatex">\( d(P_1, P_2) = 3 \)</span></li>
+<li><span class="arithmatex">\( d(P_1, P_3) = 4 \)</span></li>
+<li><span class="arithmatex">\( d(P_1, P_4) = 5 \)</span></li>
+<li><span class="arithmatex">\( d(P_2, P_3) = 2 \)</span></li>
+<li><span class="arithmatex">\( d(P_2, P_4) = 6 \)</span></li>
+<li><span class="arithmatex">\( d(P_3, P_4) = 7 \)</span></li>
+</ul>
+<p>La matriz de distancia <span class="arithmatex">\( A \)</span> se puede representar como:</p>
+<div class="arithmatex">\[
+A = \begin{pmatrix}
+0 &amp; 3 &amp; 4 &amp; 5 \\
+3 &amp; 0 &amp; 2 &amp; 6 \\
+4 &amp; 2 &amp; 0 &amp; 7 \\
+5 &amp; 6 &amp; 7 &amp; 0
+\end{pmatrix}
+\]</div>
+<p>Donde <span class="arithmatex">\( A_{i,j} \)</span> representa la distancia entre el punto <span class="arithmatex">\( i \)</span> y el punto <span class="arithmatex">\( j \)</span>.</p>
+<p>Para verificar que <span class="arithmatex">\( A \)</span> es simétrica, calculamos su transpuesta <span class="arithmatex">\( A^T \)</span>:</p>
+<div class="arithmatex">\[
+A^T = \begin{pmatrix}
+0 &amp; 3 &amp; 4 &amp; 5 \\
+3 &amp; 0 &amp; 2 &amp; 6 \\
+4 &amp; 2 &amp; 0 &amp; 7 \\
+5 &amp; 6 &amp; 7 &amp; 0
+\end{pmatrix}
+\]</div>
+<p>Como se puede observar, <span class="arithmatex">\( A^T = A \)</span>, lo que demuestra que la matriz de distancia <span class="arithmatex">\( A \)</span> es simétrica.</p>
+</details>
+<ul>
+<li>
+<p><strong>Vector unitario:</strong>  Es cuando el vector tiene norma con valor igual a 1 <span class="arithmatex">\(||x||_2 = 1\)</span></p>
+</li>
+<li>
+<p><strong>Vectores ortogonales:</strong> Dos vectores <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span> son ortogonales si <span class="arithmatex">\(x^Ty = 0\)</span>. Si ambos vectores tienen norma distinta de cero, significa que forman un ángulo de <span class="arithmatex">\(90\)</span> grados entre sí. En <span class="arithmatex">\(\mathbb{R}_n\)</span>, como máximo <span class="arithmatex">\(n\)</span> vectores pueden ser mutuamente ortogonales con norma distinta de cero. Si los vectores no sólo son ortogonales, sino que además tienen norma unitaria, se llaman ortonormales.</p>
+</li>
+<li>
+<p><strong>Matriz ortogonal:</strong> Es una matriz cuadrada cuyas filas y columnas son mutuamente ortonormales. <span class="arithmatex">\(A^TA  = AA^T = I\)</span>. Esto implica que <span class="arithmatex">\(A^{-1} = A^T\)</span></p>
+</li>
+</ul>
+<h2 id="descomposicion-en-valores-propios-de-una-matriz">Descomposición en valores propios de una matriz</h2>
+<p>Eigendecomposition es una descomposición de una matriz en un conjunto de valor y vectores propios.</p>
+<p>Sea <span class="arithmatex">\(A\)</span> una matriz cuadrada de orden <span class="arithmatex">\(n \times n\)</span> con <span class="arithmatex">\(n\)</span> vectores propios linealmente independientes <span class="arithmatex">\(q_i\)</span> donde <span class="arithmatex">\((i= 1, \cdots, n)\)</span>. Entonces <span class="arithmatex">\(A\)</span> puede ser factorizada como:</p>
+<div class="arithmatex">\[A = Q \Lambda Q^{-1} \]</div>
+<p>donde <span class="arithmatex">\(Q\)</span> es la matriz cuadrada de orden <span class="arithmatex">\(n \times n\)</span> cuya columna i-ésima es el vector propio <span class="arithmatex">\(q_i\)</span> de <span class="arithmatex">\(A\)</span>, y <span class="arithmatex">\(\Lambda\)</span> es la matriz diagonal cuyos elementos diagonales son los valores propios correspondientes, <span class="arithmatex">\(\Lambda_{ii}= \lambda_i\)</span>.</p>
+<div class="arithmatex">\[\begin{align*}
+Av &amp;= \lambda v\\
+AQ &amp;= Q\Lambda \\
+A &amp;= Q\Lambda Q^{-1} 
+\end{align*}\]</div>
+<ul>
+<li>Notar que las matrices diagonalizables se pueden factorizar de esta manera</li>
+</ul>
+<h2 id="descomposicion-en-valores-singulares-svd">Descomposición en valores singulares (SVD)</h2>
+<p>Es una factorización de una matriz real o compleja. Generaliza la eigendecomposition de una matriz cuadrada normal con una base propia ortonormal a cualquier matriz <span class="arithmatex">\(\ m\times n\)</span>.</p>
+<p>Recordar que la Eigendecomposition consiste en analizar una matriz <span class="arithmatex">\(A\)</span> para descubrir una matriz <span class="arithmatex">\(V\)</span> de vectores propios y un vector de valores propios <span class="arithmatex">\(\lambda\)</span> tal que podamos reescribir <span class="arithmatex">\(A\)</span> como:</p>
+<div class="arithmatex">\[A = V  diag(\lambda) V^{-1}\]</div>
+<p>La descomposición del valor singular es similar, excepto que esta vez se escribe <span class="arithmatex">\(A\)</span> como producto de tres matrices:</p>
+<div class="arithmatex">\[A = UDV^T \]</div>
+<p>Suponiendo que <span class="arithmatex">\(A\)</span> es una matriz <span class="arithmatex">\(m\times n\)</span>. Entonces <span class="arithmatex">\(U\)</span> se define como una matriz <span class="arithmatex">\(m\times n\)</span>, D puede ser una matriz <span class="arithmatex">\(m\times n\)</span> y V puede ser una matriz <span class="arithmatex">\(n\times n\)</span>. </p>
+<p>Se define que cada una de estas matrices tiene una estructura especial. Las matrices U y V se definen como matrices ortogonales. La matriz D se define como una matriz diagonal. Obsérvese que no es necesariamente que D sea cuadrada. Los elementos a lo largo de la diagonal de D se conocen como los valores singulares de la matriz <span class="arithmatex">\(A\)</span>. Las columnas de <span class="arithmatex">\(U\)</span> se conocen como los vectores singulares izquierdos y las columnas de <span class="arithmatex">\(V\)</span> se conocen como vectores singulares derechos.</p>
+<h2 id="pseudoinverso-de-moore-penrose">Pseudoinverso de Moore-Penrose</h2>
+<p>La inversión de matrices no está definida para matrices que no son cuadradas. La pseudoinversa de se define como una matriz</p>
+<div class="arithmatex">\[A^+ = \lim_{\alpha \to 0}(A^TA+\alpha I)^{-1}A^T\]</div>
+<p>Los algoritmos prácticos para calcular la pseudoinversa no se basan en esta definición, sino en la fórmula </p>
+<div class="arithmatex">\[ A^+ = V D^+ U\]</div>
+<p>Donde <span class="arithmatex">\(U\)</span>,<span class="arithmatex">\(D\)</span> y <span class="arithmatex">\(V\)</span> son la descomposición en valores singulares de <span class="arithmatex">\(A\)</span>, y el pseudoinverso <span class="arithmatex">\(D^+\)</span> de una matriz diagonal <span class="arithmatex">\(D\)</span> se obtiene tomando el recíproco de sus elementos no nulos
+de sus elementos distintos de cero y luego tomando el transpuesto de la matriz resultante.</p>
+<p>Cuando <span class="arithmatex">\(A\)</span> tiene más columnas que filas, la resolución de una ecuación lineal utilizando el pseudoinverso proporciona una de las muchas soluciones posibles. En concreto, se obtiene
+la solución <span class="arithmatex">\(x = A^+\)</span> y con norma euclidiana mínima <span class="arithmatex">\(||x||_2\)</span> entre todas las soluciones posibles.</p>
+<p>Cuando <span class="arithmatex">\(A\)</span> tiene más filas que columnas, es posible que no haya solución. En este caso, el uso de la pseudoinversa nos da la <span class="arithmatex">\(x\)</span> para la que <span class="arithmatex">\(Ax\)</span> es lo más cercano posible a y en términos de la norma euclidiana <span class="arithmatex">\(||Ax - y||_2\)</span></p>
+<h2 id="operador-traza">Operador traza</h2>
+<p>El operador de traza da la suma de todas los elementos de las diagonales de una matriz.
+$$ Tr(A) = \sum_i A_{i,j} $$</p>
+<ul>
+<li>Este operador es invariante a la transposición </li>
+</ul>
+<div class="arithmatex">\[Tr(A) = Tr(A^T) \]</div>
+<ul>
+<li>La traza de una matriz cuadrada compuesta de muchos factores también es invariante a mover el último factor a la primera posición, si las formas de las correspondientes permiten definir el producto resultante </li>
+</ul>
+<div class="arithmatex">\[Tr(ABC)=Tr(CAB)=Tr(BCA)\]</div>
+<h2 id="determinante">Determinante</h2>
+<p>El determinante de una matriz cuadrada, denotado <span class="arithmatex">\(det(A)\)</span>, es una función que asigna matrices a escalares reales. El determinante es igual al producto de todos los valores propios de la matriz. </p>
+<p>El valor absoluto del determinante puede considerarse como una medida de cuánto se expande o contrae el espacio. Si el determinante es 0, el espacio se contrae por completo en al menos una dimensión, perdiendo todo su volumen. Si el determinante es 1, entonces la transformación conserva el volumen.</p>
+<h2 id="referencias-y-recursos-utiles">Referencias y recursos útiles</h2>
+<ul>
+<li>
+<p><a href="https://www.deeplearningbook.org/">Deep Learning, Aaron Courville, Ian Goodfellow y Yoshua Bengio, Libro</a></p>
+</li>
+<li>
+<p><a href="https://books.google.cl/books/about/Linear_Algebra.html?id=K-dQAAAAMAAJ&amp;redir_esc=y">Linear Algebra, Georgi E. Shilov, Libro</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Essence of linear algebra, 3Blue1Brown, Videos de YouTube</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=nbBvuuNVfco&amp;ab_channel=SteveBrunton">Singular Value Decomposition (SVD), Videos de YouTube</a></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
