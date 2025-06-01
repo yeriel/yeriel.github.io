@@ -1,18 +1,18 @@
 [
 	{
-		"name": "Home",
+		"name": "Inicio",
 		"url": "/"
 	},
 	{
-		"name": "Posts",
+		"name": "Blog",
 		"url": "/posts"
 	},
 	{
-		"name": "Projects",
+		"name": "Proyectos",
 		"url": "/projects"
 	},
 	{
-		"name": "About",
+		"name": "Sobre mi",
 		"url": "/about"
 	}
 ]
