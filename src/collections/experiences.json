@@ -3,28 +3,28 @@
 		"dates": "Ene 2025 · Actualidad",
 		"role": "Machine Learning Engineer",
 		"company": "Kauel",
-		"description": "Desarrollé e implementé modelos sobre nubes de puntos (LIDAR) para la estimación de inventario de litio en SQM.\nDiseñé modelos de visión artificial (PyTorch) para la detección y medición de pretiles para BHP",
+		"description": "- Desarrollé e implementé modelos sobre nubes de puntos (LIDAR) para la estimación de inventario de litio en SQM.\n- Diseñé modelos de visión artificial (PyTorch) para la detección y medición de pretiles para BHP",
 		"logo": "/assets/images/experiences/kauel.ico"
 	},
 	{
 		"dates": "Oct 2024 · Ene 2025",
 		"role": "Data Scientist",
 		"company": "Lider BCI",
-		"description": "Integré y analisé de diversas fuentes de información del banco para la detección y prevención de fraude en transacciones financieras.",
+		"description": "- Integré y analisé de diversas fuentes de información del banco para la detección y prevención de fraude en transacciones financieras.",
 		"logo": "/assets/images/experiences/lbci.ico"
 	},
 	{
 		"dates": "May 2023 · Oct 2024",
 		"role": "Machine Learning Engineer",
 		"company": "Kauel",
-		"description": "Desarrollé e implementé modelos de vision artificial (PyTorch) para optimizar la estimación de granulometría en soluciones de ENAEX.\nDiseñé arquitecturas Retrieval-augmented Generation (RAG) personalizadas usando LangChain para la gestión documental.",
+		"description": "- Desarrollé e implementé modelos de vision artificial (PyTorch) para optimizar la estimación de granulometría en soluciones de ENAEX.\n- Diseñé arquitecturas Retrieval-augmented Generation (RAG) personalizadas usando LangChain para la gestión documental.",
 		"logo": "/assets/images/experiences/kauel.ico"
 	},
 	{
 		"dates": "Mar 2021 · Dic 2021",
 		"role": "Data Scientist",
 		"company": "Bioinformatics UTFSM",
-		"description": "Implementé y optimicé modelos de machine learning para caracterizar enzimas degradadoras de hidrocarburos aromáticos usando secuencias aminoacidicas.",
+		"description": "- Implementé y optimicé modelos de machine learning para caracterizar enzimas degradadoras de hidrocarburos aromáticos usando secuencias aminoacidicas.",
 		"logo": "/assets/images/experiences/UTFSM.ico"
 	}
 ]
