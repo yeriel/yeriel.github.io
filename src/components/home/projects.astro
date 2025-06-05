@@ -8,29 +8,28 @@ import Project from "../project.astro";
   <h2
     class="text-2xl font-bold leading-10 tracking-tight text-neutral-900 dark:text-neutral-100"
   >
-    My Projects
+    🚀 Mis Proyectos Favoritos
   </h2>
   <p class="mb-6 text-base text-neutral-600 dark:text-neutral-400">
-    Aquí hay algunos de mis proyectos destacados. Siempre estoy trabajando en algo nuevo, así que visita
-    a menudo para ver mis últimas creaciones.
+   Ideas transformadas en soluciones reales. 
   </p>
   <div
     class="grid items-stretch w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7 mt-7"
   >
     {
-      projects.map((project) => {
-        return (
+      projects
+        .filter(project => project.highlight === "true")
+        .slice(0, 6)
+        .map((project) => (
           <Project
             name={project.name}
             description={project.description}
             image={project.image}
             url={project.url}
           />
-        )
-      })
+        ))
     }
   </div>
-
   <div class="flex items-center justify-center w-full py-5">
     <Button text="Ver todos los proyectos" link="/projects" />
   </div>
